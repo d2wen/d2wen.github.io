@@ -1,170 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>一个小游戏</title>
+   <title>简历demo</title>
    <style>
-      * {
+      *{
          margin: 0;
          padding: 0;
-         box-sizing: border-box;
       }
-
-      #main {
-         margin: 100px auto;
-         width: 360px;
-         height: 420px;
-         border-radius: 5%;
-         border: 10px black solid;
-         background-color: #b7d4a8;
+      body,html{
+         width: 100%;
+         height: 100%;
+         background-color: #E1E8EE;
       }
-
-      #stage {
-         width: 304px;
-         height: 304px;
-         border: 2px black solid;
-         margin: 20px auto;
-         position: relative;
+      .main{
+         width: 820px;
+         background: #ffffff;
+         margin: 30px auto;
+         box-shadow: 0 0 8px 0 rgba(0, 0, 0, .2);
       }
-
-      #snake>div {
-         width: 10px;
-         height: 10px;
-         background-color: #000;
-         position: absolute;
-         border: 1px solid #b7d4a8;
-      }
-
-      #food {
-         width: 10px;
-         height: 10px;
-         position: absolute;
-         top: 100px;
-         left: 120px;
+      .top{
+         height: 220px;
+         background: #0b70bd;
          display: flex;
-         flex-flow: wrap;
-      }
-
-      #food>div {
-         width: 5px;
-         height: 5px;
-         background-color: black;
-         transform: rotate(45deg);
-      }
-
-      #info {
-         width: 304px;
-         margin: 0 auto;
-         display: flex;
+         align-items: center;
          justify-content: space-between;
-         font: bold 20px courier;
+      }
+
+      /* 头像 */
+      .top .pic{
+         width: 110px;
+         height: 110px;
+         border-radius: 50%;
+         border: 2px solid #fff;
+         margin-right: 30px;
+         overflow: hidden;
+      }
+      .top .pic img{
+         width: 110px;
+         height: 110px;
+      }
+      .top-left{
+         margin-left: 30px;
+         color: #fff;
+      }
+      /* 标题 */
+      .title{
+         font-size: 30px;
+      }
+
+      /* 介绍 */
+      .introduce{
+         font-size:13px;
+         line-height: 30px;
+         margin-top: 10px;
+      }
+      .my{
+         display: flex;
+         align-items: center;
+         justify-content: flex-start;
+         font-size: 12px;
+         line-height: 12px;
+         margin-top: 10px;
+      }
+      .my span{
+         margin-right: 12px;
+         padding-right: 12px;
+         border-right:1px solid #fff;
+      }
+      .my span:last-child{
+         border:none;
+      }
+      /* 简历部分 */
+      .main-box{
+         padding: 20px 40px;
+      }
+
+      /* 模块 */
+      .block{
+         padding-bottom: 20px;
+         margin-bottom: 20px;
+         border-bottom: 1px solid #f4f4f4;
+         display: flex;
+         align-items: flex-start;
+         justify-content: flex-start;
+      }
+
+      /* 标题 */
+      .block .tit{
+         font-size:20px;
+         line-height: 30px;
+         font-weight: bold;
+         width: 120px;
+      }
+
+      .right{
+         flex: 1;
+      }
+
+      .right .tip{
+         line-height: 30px;
+         display: flex;
+         align-items: center;
+         justify-content: flex-start;
+      }
+      .right .tip span{
+         margin-right: 20px;
+         font-size: 13px;
+      }
+      .right .tip b{
+         margin-right: 30px;
+         font-size: 14px;
+      }
+      .word{
+         font-size: 15px;
+         line-height: 24px;
+      }
+      .right ul li{
+         line-height: 28px;
+         font-size: 15px;
+         padding-bottom: 20px;
+      }
+      .right ol li{
+         line-height: 20px;
+         font-size: 15px;
+         padding-bottom: 10px;
+      }
+      ul ,ol{
+         list-style: none;
       }
    </style>
 </head>
-
 <body>
-   <div id="main">
-      <div id="stage">
-         <div id="snake">
-            <div></div>
-         </div>
-         <div id="food">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-         </div>
+<div class="main">
+   <!-- 顶部 -->
+   <div class="top">
+      <div class="top-left">
+         <p class="title">个人简历</p>
+         <p class="introduce">对新技术和趋势保持敏感，并且乐意学习和适应不断变化的技术环境</p>
+         <!-- 个人信息 -->
+         <p class="my">
+            <span>杜付豪</span>
+            <span>男</span>
+            <span>本科</span>
+            <span>年龄：22</span>
+            <span>电话：13197456529</span>
+            <span>邮箱：2511944114@qq.com</span>
+         </p>
       </div>
-      <div id="info">
-         <div>SCORE:<span id="score">0</span></div>
-         <div>LEVEL:<span id="level">1</span></div>
+      <!-- 头像 -->
+      <div class="pic">
+         <img src="./薯条.jpg">
       </div>
    </div>
-   <script>
-      const snake = document.getElementById("snake")
-      const snakes = snake.getElementsByTagName("div")
-      const food = document.getElementById("food")
-      const scoreSpan = document.getElementById("score")
-      const levelSpan = document.getElementById("level")
-      let score = 0
-      let level = 0
-      function changeFood() {
-         const x = Math.floor(Math.random() * 30) * 10
-         const y = Math.floor(Math.random() * 30) * 10
-         food.style.left = x + "px"
-         food.style.top = y + "px"
-      }
-      changeFood()
-      let dir
-      let keyActive = true
-      const KeyArr = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
-      const reObj = {
-         ArrowDown: "ArrowUp",
-         ArrowUp: "ArrowDown",
-         ArrowRight: "ArrowLeft",
-         ArrowLeft: "ArrowRight"
-      }
-      document.addEventListener("keydown", (event) => {
-         if (keyActive && KeyArr.includes(event.key)) {
-            if (snakes.length < 2 || reObj[dir] !== event.key) {
-               dir = event.key
-               keyActive = false
-            }
-         }
-      })
-      setTimeout(function move() {
-         const head = snakes[0]
-         let x = head.offsetLeft
-         let y = head.offsetTop
-         switch (dir) {
-            case "ArrowUp":
-               y -= 10
-               break
-            case "ArrowDown":
-               y += 10
-               break
-            case "ArrowLeft":
-               x -= 10
-               break
-            case "ArrowRight":
-               x += 10
-               break
-         }
-         if (
-            head.offsetTop === food.offsetTop &&
-            head.offsetLeft === food.offsetLeft
-         ) {
-            changeFood()
-            snake.insertAdjacentHTML("beforeend", "<div/>")
-            score++
-            scoreSpan.textContent = score
-            if (score % 5 === 0 && level < 19) {
-               level++
-               levelSpan.textContent = level + 1
-            }
-         }
-         if (x < 0 || x > 290 || y < 0 || y > 290) {
-            alert(`撞墙了!游戏结束!您的得分为${score},您的等级为${level}`)
-            return
-         }
-         for (let i = 0; i < snakes.length - 1; i++) {
-            if (snakes[i].offsetLeft === x &&
-               snakes[i].offsetTop === y) {
-               alert(`撞到自己了!游戏结束!您的得分为${score},您的等级为${level}`)
-               return
-            }
-         }
-         const tail = snakes[snakes.length - 1]
-         tail.style.left = x + "px"
-         tail.style.top = y + "px"
-         snake.insertAdjacentElement("afterbegin", tail)
-         keyActive = true
-         setTimeout(move, 300 - level * 15)
-      }, 300)
-   </script>
-</body>
+   <!-- 顶部end -->
 
+   <!-- 简历部分 -->
+   <div class="main-box">
+      <!-- 教育背景 -->
+      <div class="block">
+         <!-- 标题 -->
+         <div class="tit">教育背景</div>
+         <div class="right">
+            <div class="tip">
+               <b>2018.09-2022.06</b>
+               <b>武汉工程科技学院</b>
+               <b>计算机科学与技术</b>
+            </div>
+            <p class="word">
+               主修课程：计算机文化基础 web前端开发 C语言程序设计 LINUX操作系统 数据库原理及应用 Windows程序设计 Android综合开发 汇编语言
+            </p>
+         </div>
+      </div>
+      <!-- 工作经验 -->
+      <div class="block">
+         <!-- 标题 -->
+         <div class="tit">工作经验</div>
+         <div class="right">
+            <div class="tip">
+               <b>2022.07 - 2023.07</b>
+               <b>北京金星丰源商贸有限公司</b>
+               <b>web前端开发</b>
+            </div>
+            <p class="word">
+               主修职责：分析需求、界面设计与开发、协作与沟通、性能优化、故障排除与解决
+            </p>
+         </div>
+      </div>
+      <!-- 项目经验 -->
+      <div class="block">
+         <div class="tit">项目经验</div>
+         <div class="right">
+            <ul>
+               <li>
+                  负责开发公司网站的前端部分，使用HTML、CSS和JavaScript实现响应式设计和用户交互功能。该网站采用了Flexbox技术，并使用JavaScript编写了交互效果。最终，该网站的页面加载速度比原始版本快了30%，用户满意度也得到了显著提高。
+               </li>
+               <li>
+                  参与一个电商网站开发项目，负责与团队合作，参与项目需求分析和UI/UX设计讨论。
+                  使用HTML、CSS和JavaScript实现网站的基本结构和页面布局。
+                  使用Vue.js框架开发组件，增加网站的交互性和动态性。
+                  与后端开发团队进行接口对接，实现数据的异步加载和交互。
+                  优化网站性能，包括减少资源加载时间和响应时间，以提高用户体验。
+                  参与测试和调试阶段，修复并改进前端代码中的问题。架构了灵活的组件化前端架构，使得整个项目易于维护和扩展。
+               </li>
+               <li>
+                  发现过字节投资的虎扑app声望系统和评论区系统的bug。
+               </li>
+            </ul>
+         </div>
+      </div>
+      <!-- 自我评价 -->
+      <div class="block">
+         <!-- 标题 -->
+         <div class="tit">自我评价</div>
+         <div class="right">
+            <p class="word">
+               作为一名前端开发程序员，我具备扎实的技术能力、良好的团队合作精神和持续学习的动力。我致力于通过创造优质的用户界面和出色的用户体验来推动项目的成功。
+            </p>
+         </div>
+      </div>
+      <!-- 个人技能 -->
+      <div class="block">
+         <div class="tit">个人技能</div>
+         <div class="right">
+            <ol>
+               <li>熟悉 HTML CSS JavaScript TypeScript</li>
+               <li>能在 Vue2 项目中搭配 element-UI echarts 等组件创建出用户喜欢的页面</li>
+               <li>了解 less nodejs webpack git axios 的基本使用</li>
+            </ol>
+         </div>
+      </div>
+   </div>
+   <!-- 简历部分end -->
+</div>
+<script>
+
+</script>
+</body>
 </html>
