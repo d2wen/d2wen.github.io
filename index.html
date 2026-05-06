@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的个人主页</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .projects {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .project-card {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        a {
+            text-decoration: none;
+            color: #0366d6;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            border-bottom: 2px solid #0366d6;
+            padding-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>👋 欢迎来到我的主页</h1>
+    
+    <h2>📁 我的项目</h2>
+    <div class="projects">
+        <div class="project-card">
+            <h3><a href="/my-first-project">项目一：待办事项应用</a></h3>
+            <p>一个简洁的待办清单工具，支持增删改查和本地存储。</p>
+        </div>
+        
+        <div class="project-card">
+            <h3><a href="/docs-site">项目二：技术文档站</a></h3>
+            <p>使用Astro搭建的组件库文档，包含API参考和示例。</p>
+        </div>
+        
+        <div class="project-card">
+            <h3><a href="/resume">我的在线简历</a></h3>
+            <p>开发经验与技术栈展示，可下载PDF版本。</p>
+        </div>
+    </div>
+    
+    <footer style="margin-top: 3rem; text-align: center; color: #666;">
+        <p>© 2026 | 更多项目请访问我的 <a href="https://github.com/d2wen">GitHub</a></p>
+    </footer>
+</body>
+</html>
