@@ -1,0 +1,22 @@
+name: Deploy static HTML to GitHub Pages
+
+on:
+  push:
+    branches: [ "main" ]  # 当推送到 main 分支时触发
+
+permissions:
+  contents: write  # 允许推送代码到 gh-pages 分支
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4  # 将你的仓库代码下载到 GitHub Actions 的虚拟环境中
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4  # 一个社区流行的 GitHub Pages 部署工具
+        with:
+          folder: .        # 要部署的文件夹（当前目录）
+          branch: gh-pages # 推送到这个分支
+          clean: true      # 部署前清空 gh-pages 分支的旧文件
